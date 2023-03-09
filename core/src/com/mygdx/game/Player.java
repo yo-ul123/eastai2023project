@@ -16,7 +16,7 @@ public class Player {
     float ySpeed = 0;
     float xSpeed = 0;
     float gravity = -1;
-    float friction = -1;
+    double friction = -0.3;
     float maxSpeed = 20;
 
     public Player() {
@@ -46,7 +46,7 @@ public class Player {
                 }
             }
         }
-        if (!Gdx.input.isTouched())
+        if (!Gdx.input.isTouched() && chargeY > 0)
         {
             jump = true;
         }
@@ -61,6 +61,10 @@ public class Player {
         }
         if (xSpeed < 0) {
             xSpeed -= friction;
+        }
+        if(Math.abs(xSpeed - friction) < friction + 1)
+        {
+            xSpeed = 0;
         }
         y += ySpeed;
         x += xSpeed;
